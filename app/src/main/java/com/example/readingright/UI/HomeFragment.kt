@@ -1,7 +1,6 @@
 package com.example.readingright.UI
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +13,7 @@ import com.example.readingright.R
 import com.example.readingright.databinding.FragmentHomeBinding
 import com.example.readingright.db.ingredients
 import com.example.readingright.util.Resources
+import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
     lateinit var binding: FragmentHomeBinding
@@ -37,15 +37,15 @@ class HomeFragment : Fragment() {
         viewmodel.breakingNews.observe(requireActivity(), {
             when (it) {
                 is Resources.Success -> {
+                    hide()
                     Toast.makeText(context, "sucess", Toast.LENGTH_SHORT).show()
                     binding.Recipiename.text = it.data!!.meals!![0].strMeal
                     Glide.with(this)
                         .load(it.data.meals!![0].strMealThumb).into(binding.image)
 
                     binding.ingredients.text = it.data.meals[0].strInstructions
-                    binding.category.text = it.data.meals[0].strCategory
-                    binding.area.text = it.data.meals[0].strArea
-                    Log.d("ingre", "${it.data.meals[0].meal()}")
+                    binding.category.text = "Category : ${it.data.meals[0].strCategory} "
+                    binding.area.text = "Area :${it.data.meals[0].strArea}"
 
                     binding.ingredientslist.setOnClickListener { view ->
                         val ing = ingredients(
@@ -62,15 +62,31 @@ class HomeFragment : Fragment() {
                             HomeFragmentDirections.actionHomeFragment2ToWebviewFragment(it.data.meals[0].strYoutube!!)
                         findNavController().navigate(action)
                     }
+                    binding.Scard.setOnClickListener { view ->
+                        val action =
+                            HomeFragmentDirections.actionHomeFragment2ToWebviewFragment(it.data.meals[0].strSource!!)
+                        findNavController().navigate(action)
+                    }
                 }
                 is Resources.Failure -> {
                     Toast.makeText(context, "falure ${it.message}", Toast.LENGTH_SHORT).show()
+                }
+                is Resources.Loading -> {
+                    show()
                 }
             }
 
         })
 
 
+    }
+
+    fun hide() {
+        progress.visibility = View.INVISIBLE
+    }
+
+    fun show() {
+        progress.visibility = View.VISIBLE
     }
 
     fun rearrange(list: List<String?>): List<String> {

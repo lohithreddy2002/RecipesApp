@@ -12,6 +12,7 @@ import com.example.readingright.R
 import com.example.readingright.Searchviewmodel
 import com.example.readingright.databinding.FragmentSearchBinding
 import com.example.readingright.util.Resources
+import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
@@ -42,6 +43,7 @@ class SearchFragment : Fragment() {
         super.onStart()
 
         binding = FragmentSearchBinding.bind(requireView())
+        hide()
         recycle()
         viewmodel = (activity as MainActivity).Sviewmodel
         var job: Job? = null
@@ -65,11 +67,19 @@ class SearchFragment : Fragment() {
         viewmodel.query.observe(this, {
             when (it) {
                 is Resources.Success -> {
+                    hide()
                     it.data?.let { ingredient ->
                         Sadapter.differ.submitList(ingredient.meals)
-
                     }
                 }
+                is Resources.Failure -> {
+                    hide()
+
+                }
+                is Resources.Loading -> {
+                    show()
+                }
+
             }
         })
 
@@ -83,6 +93,14 @@ class SearchFragment : Fragment() {
             layoutManager = LinearLayoutManager(activity)
 
         }
+    }
+
+    fun show() {
+        progresssearch.visibility = View.VISIBLE
+    }
+
+    fun hide() {
+        progresssearch.visibility = View.INVISIBLE
     }
 
 

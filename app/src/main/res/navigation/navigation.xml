@@ -72,7 +72,7 @@
     <fragment
         android:id="@+id/webviewFragment"
         android:name="com.example.readingright.UI.WebviewFragment"
-        android:label="fragment_webview"
+        android:label="Webview"
         tools:layout="@layout/fragment_webview">
         <argument
             android:name="url"
