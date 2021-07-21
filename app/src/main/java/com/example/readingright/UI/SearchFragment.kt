@@ -49,6 +49,10 @@ class SearchFragment : Fragment() {
         var job: Job? = null
 
         binding.editText.addTextChangedListener {
+            if (it.toString() == "") {
+                showtext()
+            }
+            hidetext()
             job?.cancel()
             job = MainScope().launch {
                 delay(500L)
@@ -68,8 +72,12 @@ class SearchFragment : Fragment() {
             when (it) {
                 is Resources.Success -> {
                     hide()
+                    hidetext()
                     it.data?.let { ingredient ->
                         Sadapter.differ.submitList(ingredient.meals)
+                    }
+                    if (it.data?.meals == null) {
+                        showtext()
                     }
                 }
                 is Resources.Failure -> {
@@ -101,6 +109,15 @@ class SearchFragment : Fragment() {
 
     fun hide() {
         progresssearch.visibility = View.INVISIBLE
+    }
+
+    fun showtext() {
+        binding.empty.visibility = View.VISIBLE
+
+    }
+
+    fun hidetext() {
+        binding.empty.visibility = View.INVISIBLE
     }
 
 

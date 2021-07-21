@@ -52,7 +52,7 @@ class RecipieFragment : Fragment() {
         if (Meal.strYoutube != null) {
             binding.Ycard.setOnClickListener {
                 val action =
-                    HomeFragmentDirections.actionHomeFragment2ToWebviewFragment(Meal.strYoutube)
+                   RecipieFragmentDirections.actionRecipieFragmentToWebviewFragment(Meal.strYoutube)
                 findNavController().navigate(action)
             }
         } else {
@@ -61,7 +61,7 @@ class RecipieFragment : Fragment() {
         if (Meal.strSource != null) {
             binding.Scard.setOnClickListener {
                 val action =
-                    HomeFragmentDirections.actionHomeFragment2ToWebviewFragment(Meal.strSource)
+                    RecipieFragmentDirections.actionRecipieFragmentToWebviewFragment(Meal.strSource)
                 findNavController().navigate(action)
             }
         } else {
@@ -74,7 +74,7 @@ class RecipieFragment : Fragment() {
                 rearrange(Meal.measure())
             )
             val action =
-                HomeFragmentDirections.actionHomeFragment2ToIngredientsFragment(ing)
+                RecipieFragmentDirections.actionRecipieFragmentToIngredientsFragment(ing)
             findNavController().navigate(action)
         }
 
