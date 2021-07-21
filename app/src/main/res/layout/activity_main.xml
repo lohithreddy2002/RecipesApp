@@ -17,7 +17,7 @@
         app:defaultNavHost="true"
         android:id="@+id/fragment"
         app:navGraph="@navigation/navigation"
-        android:layout_margin="10dp" />
+         />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomnav"

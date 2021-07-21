@@ -56,16 +56,23 @@ class HomeFragment : Fragment() {
                             HomeFragmentDirections.actionHomeFragment2ToIngredientsFragment(ing)
                         findNavController().navigate(action)
                     }
-
-                    binding.Ycard.setOnClickListener { view ->
-                        val action =
-                            HomeFragmentDirections.actionHomeFragment2ToWebviewFragment(it.data.meals[0].strYoutube!!)
-                        findNavController().navigate(action)
+                    if (it.data.meals[0].strYoutube == null) {
+                        binding.Ycard.visibility = View.INVISIBLE
+                    } else {
+                        binding.Ycard.setOnClickListener { view ->
+                            val action =
+                                HomeFragmentDirections.actionHomeFragment2ToWebviewFragment(it.data.meals[0].strYoutube!!)
+                            findNavController().navigate(action)
+                        }
                     }
-                    binding.Scard.setOnClickListener { view ->
-                        val action =
-                            HomeFragmentDirections.actionHomeFragment2ToWebviewFragment(it.data.meals[0].strSource!!)
-                        findNavController().navigate(action)
+                    if (it.data.meals[0].strSource == null) {
+                        binding.Scard.visibility = View.INVISIBLE
+                    } else {
+                        binding.Scard.setOnClickListener { view ->
+                            val action =
+                                HomeFragmentDirections.actionHomeFragment2ToWebviewFragment(it.data.meals[0].strSource!!)
+                            findNavController().navigate(action)
+                        }
                     }
                 }
                 is Resources.Failure -> {
