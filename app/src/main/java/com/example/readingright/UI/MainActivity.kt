@@ -16,7 +16,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-    lateinit var Sviewmodel: Searchviewmodel
     lateinit var Hviewmodel: Homeviewmodel
     private lateinit var binding: ActivityMainBinding
     lateinit var navController: NavController
@@ -27,9 +26,7 @@ class MainActivity : AppCompatActivity() {
 
         val repo = Repo(RecipieDatabase(this))
         val Hfactory = HomeViewFactory(repo)
-        val Sfactory = SearchViewfactory(repo)
         Hviewmodel = ViewModelProvider(this, Hfactory).get(Homeviewmodel::class.java)
-        Sviewmodel = ViewModelProvider(this, Sfactory).get(Searchviewmodel::class.java)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         navController = fragment.findNavController()

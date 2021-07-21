@@ -37,6 +37,7 @@ class HomeFragment : Fragment() {
         viewmodel.breakingNews.observe(requireActivity(), {
             when (it) {
                 is Resources.Success -> {
+                    binding.constr.visibility = View.VISIBLE
                     hide()
                     Toast.makeText(context, "sucess", Toast.LENGTH_SHORT).show()
                     binding.Recipiename.text = it.data!!.meals!![0].strMeal
@@ -47,7 +48,7 @@ class HomeFragment : Fragment() {
                     binding.category.text = "Category : ${it.data.meals[0].strCategory} "
                     binding.area.text = "Area :${it.data.meals[0].strArea}"
 
-                    binding.ingredientslist.setOnClickListener { view ->
+                    binding.card.setOnClickListener { view ->
                         val ing = ingredients(
                             rearrange(it.data.meals[0].meal()),
                             rearrange(it.data.meals[0].measure())
@@ -76,10 +77,13 @@ class HomeFragment : Fragment() {
                     }
                 }
                 is Resources.Failure -> {
+                    binding.constr.visibility = View.INVISIBLE
+                    binding.error.visibility = View.VISIBLE
                     Toast.makeText(context, "falure ${it.message}", Toast.LENGTH_SHORT).show()
                 }
                 is Resources.Loading -> {
                     show()
+                    binding.constr.visibility = View.INVISIBLE
                 }
             }
 

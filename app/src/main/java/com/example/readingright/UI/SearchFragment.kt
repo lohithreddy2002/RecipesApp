@@ -8,8 +8,8 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.readingright.Homeviewmodel
 import com.example.readingright.R
-import com.example.readingright.Searchviewmodel
 import com.example.readingright.databinding.FragmentSearchBinding
 import com.example.readingright.util.Resources
 import kotlinx.android.synthetic.main.fragment_search.*
@@ -22,7 +22,7 @@ import kotlinx.coroutines.launch
 class SearchFragment : Fragment() {
 
     lateinit var binding: FragmentSearchBinding
-    lateinit var viewmodel: Searchviewmodel
+    lateinit var viewmodel: Homeviewmodel
     lateinit var Sadapter: RecyclerAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +45,7 @@ class SearchFragment : Fragment() {
         binding = FragmentSearchBinding.bind(requireView())
         hide()
         recycle()
-        viewmodel = (activity as MainActivity).Sviewmodel
+        viewmodel = (activity as MainActivity).Hviewmodel
         var job: Job? = null
 
         binding.editText.addTextChangedListener {

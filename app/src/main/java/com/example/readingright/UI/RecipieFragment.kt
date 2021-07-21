@@ -9,14 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
-import com.example.readingright.Homeviewmodel
 import com.example.readingright.R
 import com.example.readingright.databinding.FragmentRecipieBinding
 import com.example.readingright.db.ingredients
 
 class RecipieFragment : Fragment() {
     lateinit var binding: FragmentRecipieBinding
-    lateinit var viewmodel: Homeviewmodel
     private val args: RecipieFragmentArgs by navArgs()
 
     override fun onCreateView(
@@ -38,13 +36,12 @@ class RecipieFragment : Fragment() {
         super.onStart()
         binding = FragmentRecipieBinding.bind(requireView())
         binding.toolbar
-
+        val viewmodel = (activity as MainActivity).Hviewmodel
         val Meal = args.recipie
         Glide.with(this).load(Meal.strMealThumb).into(binding.image)
         binding.category.text = "Category : ${Meal.strCategory}"
         binding.area.text = "Area :${Meal.strArea}"
         binding.ingredients.text = Meal.strInstructions
-//        binding.instructions.text = Meal.strInstructions
         binding.Title.title = Meal.strMeal
         binding.insert.setOnClickListener {
             viewmodel.insert(Meal)
@@ -68,7 +65,7 @@ class RecipieFragment : Fragment() {
             binding.Scard.visibility = View.INVISIBLE
         }
 
-        binding.ingredientslist.setOnClickListener { view ->
+        binding.card.setOnClickListener { view ->
             val ing = ingredients(
                 rearrange(Meal.meal()),
                 rearrange(Meal.measure())

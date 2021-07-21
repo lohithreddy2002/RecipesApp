@@ -63,7 +63,7 @@
     <fragment
         android:id="@+id/ingredientsFragment"
         android:name="com.example.readingright.UI.IngredientsFragment"
-        android:label="fragment_ingredients"
+        android:label="Ingredients"
         tools:layout="@layout/fragment_ingredients">
         <argument
             android:name="ingrdients"
