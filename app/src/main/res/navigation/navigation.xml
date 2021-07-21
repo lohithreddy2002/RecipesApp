@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/homeFragment2">
+    <fragment
+        android:id="@+id/homeFragment2"
+        android:name="com.example.readingright.UI.HomeFragment"
+        android:label="Random Recipie"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment2_to_recipieFragment"
+            app:destination="@id/recipieFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/recipieFragment"
+        android:name="com.example.readingright.UI.RecipieFragment"
+        android:label="Recipie">
+        <argument
+            android:name="recipie"
+            app:argType="com.example.readingright.db.Meal" />
+        <action
+            android:id="@+id/action_recipieFragment_to_searchFragment2"
+            app:destination="@id/searchFragment2" />
+        <action
+            android:id="@+id/action_recipieFragment_to_savedFragment"
+            app:destination="@id/savedFragment" />
+        <action
+            android:id="@+id/action_recipieFragment_to_homeFragment2"
+            app:destination="@id/homeFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment2"
+        android:name="com.example.readingright.UI.SearchFragment"
+        android:label="Search Recipies"
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_searchFragment2_to_recipieFragment"
+            app:destination="@id/recipieFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/savedFragment"
+        android:name="com.example.readingright.UI.SavedFragment"
+        android:label="Saved Recipies"
+        tools:layout="@layout/fragment_saved">
+        <action
+            android:id="@+id/action_savedFragment_to_recipieFragment"
+            app:destination="@id/recipieFragment" />
+    </fragment>
+</navigation>
